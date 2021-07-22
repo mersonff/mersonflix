@@ -166,6 +166,9 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -187,9 +190,10 @@ DEPENDENCIES
   rspec-rails (~> 5.0.0)
   spring
   tzinfo-data
+  validate_url
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.0p0
 
 BUNDLED WITH
    2.2.24
