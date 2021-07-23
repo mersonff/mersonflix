@@ -1,24 +1,15 @@
-# README
+# MERSONFLIX
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API para plataforma de compartilhamento de vídeos
 
-Things you may want to cover:
+Projeto que faz parte do Alura Challenger - Back-End
 
-* Ruby version
+* Versão do Ruby
+	* 3.0.0
 
-* System dependencies
+* Versão do Rails
+	* 6.1.4
 
-* Configuration
+* Banco de Dados
+	* PostgreSQL 13 (necessário colocar as suas credencias no arquivo database.yml)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
