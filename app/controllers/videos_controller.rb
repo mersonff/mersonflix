@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show]
+  before_action :set_video, only: [:show, :update, :destroy]
+
   def index
     @videos = Video.all
 
@@ -19,7 +20,17 @@ class VideosController < ApplicationController
     render json: @video
   end
 
+  def update
+    if @video.update(video_params)
+      render json: @video
+    else
+      render json: @video.errors, status: :unprocessable_entity
+    end
+  end
 
+  def destroy
+    @video.destroy
+  end
 
   private
 
