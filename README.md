@@ -13,3 +13,5 @@ Projeto que faz parte do Alura Challenger - Back-End
 * Banco de Dados
 	* PostgreSQL 13 (necessário colocar as suas credencias no arquivo database.yml)
 
+#alurachallengeback
+
