@@ -78,3 +78,26 @@ describe 'POST categories#create' do
     end
   end
 end
+
+describe 'GET categories#show' do
+  before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+  end
+  context 'with existing id' do
+    it 'return the category data and :ok status' do
+      get "/categories/#{@category.id}"
+      json = JSON.parse(response.body)
+      expect(json['title']).to eq('LIVRE')
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  context 'with non existing id' do
+    id = 0
+    it 'returns 404 record not found' do
+      get "/categories/#{id}"
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to eq( "{\"error\":\"Couldn't find Category with 'id'=0\"}")
+    end
+  end
+end
