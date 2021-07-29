@@ -101,3 +101,32 @@ describe 'GET categories#show' do
     end
   end
 end
+
+describe 'PUT categories#update' do
+  before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+  end
+  context 'with valid attributes' do
+    it 'update the category and return :ok status' do
+      category_params = {
+        category: {
+          title: 'Ação',
+          color: 'AZUL'
+        }
+      }
+
+      new_category_params = {
+        category: {
+          title: 'Açãozaço',
+          color: 'PRETO'
+        }
+      }
+      category = Category.create(category_params[:category])
+      put "/categories/#{category.id}", params: new_category_params
+      json = JSON.parse(response.body)
+      expect(json["title"]).to include("Açãozaço")
+      expect(json["color"]).to include("PRETO")
+      expect(response).to have_http_status(:ok)
+    end
+  end
+end

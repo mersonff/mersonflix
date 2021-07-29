@@ -81,7 +81,7 @@ end
 
 describe 'PUT videos#update' do
   context 'with valid attributes' do
-    it 'update de video and return :ok status' do
+    it 'update the video and return :ok status' do
       video_params = {
         video: {
           title: 'RED',
