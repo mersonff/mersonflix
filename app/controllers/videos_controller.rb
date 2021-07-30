@@ -2,9 +2,18 @@ class VideosController < ApplicationController
   before_action :set_video, only: [:show, :update, :destroy]
 
   def index
-    @videos = Video.all
+    if params[:search].present?
+      @videos = Video.find_by_title(params[:search])
+      if @videos.nil?
+        render json: {"error": "not found"}
+      else
+        render json: @videos
+      end
+    else
+      @videos = Video.all
+      render json: @videos
+    end
 
-    render json: @videos
   end
 
   def create
