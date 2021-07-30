@@ -130,3 +130,21 @@ describe 'PUT categories#update' do
     end
   end
 end
+
+describe 'DELETE categories#delete' do
+  before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+  end
+  it 'delete the category and return no_content status' do
+    category_params = {
+      category: {
+        title: 'RED',
+        color: 'Lorem Ipsum'
+      }
+    }
+    category = Category.create(category_params[:category])
+    delete "/categories/#{category.id}"
+    expect(response.status).to eq(204)
+  end
+
+end
