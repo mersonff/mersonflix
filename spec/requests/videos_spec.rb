@@ -2,34 +2,37 @@ require 'rails_helper'
 
 describe 'GET all videos route', type: :request do
   before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
     10.times do
-      @video = Video.create(title: "O vento levou", description: "Loren Ipsum", url: "http://www.teste.com")
+      @video = Video.create(title: "O vento levou", description: "Loren Ipsum", url: "http://www.teste.com", category: @category)
     end
   end
 
-  describe 'GET videos#index' do
-    context 'with persisted videos' do
-      before do
-        get '/videos'
-      end
-      it 'return the list of persisted videos' do
-        expect(JSON.parse(response.body).size).to eq(10)
-      end
-      it 'return :success status' do
-        expect(response).to have_http_status(:success)
-      end
+  context 'with persisted videos' do
+    before do
+      get '/videos'
+    end
+    it 'return the list of persisted videos' do
+      expect(JSON.parse(response.body).size).to eq(10)
+    end
+    it 'return :success status' do
+      expect(response).to have_http_status(:success)
     end
   end
 end
 
-describe 'POST videos#create' do
+describe 'POST videos#create', type: :request do
+  before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+  end
   context 'with valid attributes' do
     it 'create video and return :created status' do
       video_params = {
         video: {
           title: 'RED',
           description: 'Lorem Ipsum',
-          url: 'http://www.teste.com/video'
+          url: 'http://www.teste.com/video',
+          category_id: @category.id
         }
       }
       post '/videos', params: video_params
@@ -45,7 +48,8 @@ describe 'POST videos#create' do
         video: {
           title: '',
           description: '',
-          url: ''
+          url: '',
+          category_id: @category.id
         }
       }
       post '/videos', params: video_params
@@ -56,9 +60,10 @@ describe 'POST videos#create' do
   end
 end
 
-describe 'GET videos#show' do
+describe 'GET videos#show', type: :request do
   before do
-    @video = Video.create(title: "O vento levou", description: "Loren Ipsum", url: "http://www.teste.com")
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+    @video = Video.create(title: "O vento levou", description: "Loren Ipsum", url: "http://www.teste.com", category: @category)
   end
   context 'with existing id' do
     it 'return the video data and :ok status' do
@@ -79,14 +84,19 @@ describe 'GET videos#show' do
   end
 end
 
-describe 'PUT videos#update' do
+describe 'PUT videos#update', type: :request do
+  before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+  end
+
   context 'with valid attributes' do
     it 'update the video and return :ok status' do
       video_params = {
         video: {
           title: 'RED',
           description: 'Lorem Ipsum',
-          url: 'http://www.teste.com/video'
+          url: 'http://www.teste.com/video',
+          category_id: @category.id
         }
       }
 
@@ -111,7 +121,8 @@ describe 'PUT videos#update' do
         video: {
           title: 'RED',
           description: 'Lorem Ipsum',
-          url: 'http://www.teste.com/video'
+          url: 'http://www.teste.com/video',
+          category_id: @category.id
         }
       }
 
@@ -119,7 +130,8 @@ describe 'PUT videos#update' do
         video: {
           title: '',
           description: 'Lorem Ipsum 2',
-          url: 'http://www.teste.com/video2'
+          url: 'http://www.teste.com/video2',
+          category: @category
         }
       }
 
@@ -132,13 +144,17 @@ describe 'PUT videos#update' do
   end
 end
 
-describe 'DELETE videos#delete' do
+describe 'DELETE videos#delete', type: :request do
+  before do
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+  end
   it 'delete the video and return no_content status' do
     video_params = {
       video: {
         title: 'RED',
         description: 'Lorem Ipsum',
-        url: 'http://www.teste.com/video'
+        url: 'http://www.teste.com/video',
+        category_id: @category.id
       }
     }
     video = Video.create(video_params[:video])

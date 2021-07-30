@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Video, type: :model do
   before do
-    @video = Video.new(title: 'RED', description: 'Lorem Ipsum', url:'http://www.test.com/video')
+    @category = Category.create(title: "LIVRE", color: "BRANCO")
+    @video = Video.new(title: 'RED', description: 'Lorem Ipsum', url:'http://www.test.com/video', category: @category)
   end
 
   it 'is valid with valid attributes' do
