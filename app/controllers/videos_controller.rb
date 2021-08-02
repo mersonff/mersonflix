@@ -1,6 +1,12 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:list_free]
   before_action :set_video, only: [:show, :update, :destroy]
+
+  def list_free
+    @categories = Category.last(10)
+    render json: @categories
+  end
 
   def index
     if params[:search].present?
@@ -14,7 +20,6 @@ class VideosController < ApplicationController
       @videos = Video.all.page(params[:page])
       paginate json: @videos
     end
-
   end
 
   def create
