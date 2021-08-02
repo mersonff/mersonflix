@@ -2,8 +2,8 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
 
   def index
-    @categories = Category.all
-    render json: @categories
+    @categories = Category.all.page(params[:page])
+    paginate json: @categories
   end
 
   def show

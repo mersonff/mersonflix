@@ -3,6 +3,8 @@ class Category < ApplicationRecord
 
   validate :first_category_should_be_free
 
+  paginates_per 5
+
   private
 
     def first_category_should_be_free
