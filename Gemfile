@@ -6,6 +6,7 @@ ruby '3.0.0'
 gem "validate_url"
 gem "kaminari"
 gem "api-pagination"
+gem 'devise_token_auth'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
