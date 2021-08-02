@@ -5,13 +5,13 @@ class VideosController < ApplicationController
     if params[:search].present?
       @videos = Video.find_by_title(params[:search])
       if @videos.nil?
-        render json: {"error": "not found"}
+        paginate json: {"error": "not found"}
       else
-        render json: @videos
+        paginate json: @videos
       end
     else
-      @videos = Video.all
-      render json: @videos
+      @videos = Video.all.page(params[:page])
+      paginate json: @videos
     end
 
   end
