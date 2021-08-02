@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  get root_path, to: 'videos#index'
   get '/videos/free', to: 'videos#list_free'
 
   resources :videos do
